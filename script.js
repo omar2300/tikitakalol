@@ -67,6 +67,7 @@ const trivia = [
       'Which champion is associated with the region of Demacia and the role of Botlane?',
     answer: 'Vayne',
   },
+  
   {
     region: 'Ionia',
     lane: 'Support',
