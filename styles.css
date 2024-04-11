@@ -1,0 +1,54 @@
+/* Styling for the cell */
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgb(58, 58, 58);
+  display: inline-block;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  vertical-align: top; /* Align cells at the top */
+}
+
+.cell:hover {
+  background-color: #f0f0f0; /* Light gray background color on hover */
+}
+
+/* Styling for the board */
+#board {
+  width: 420px; /* Total width of the grid (4 cells * cell width + 2px border + 20px margin) */
+  margin: 20px auto; /* Center the board horizontally */
+  overflow: hidden; /* Clearfix for the floated elements */
+}
+
+/* Styling for the rows */
+.row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Styling for the regions */
+.regions {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px; /* Add some space below the regions */
+}
+
+/* Styling for the lanes */
+.lanes {
+  float: left;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the columns */
+.column {
+  display: inline-block;
+  vertical-align: top;
+}
