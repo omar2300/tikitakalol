@@ -364,6 +364,7 @@ function generateTriviaQuestions(championData) {
   return trivia;
 }
 
+
 let [lane1, lane2, lane3] = getRandomUniqueItems(allLanes, 3);
 let [reg1, reg2, reg3] = getRandomUniqueItems(allRegions, 3);
 // Function to check for a winner
@@ -408,8 +409,8 @@ function makeMove(cellIndex) {
     if (questionObj) {
       const playerAnswer = prompt(questionObj.question);
       if (playerAnswer) {
-        const correctAnswer = questionObj.answer.toLowerCase().trim();
-        if (playerAnswer.toLowerCase().trim() === correctAnswer) {
+        const correctAnswers = trivia.filter(q => q.region === region && q.lane === lane).map(q => q.answer.toLowerCase().trim());
+        if (correctAnswers.includes(playerAnswer.toLowerCase().trim())) {
           board[cellIndex] = currentPlayer;
           renderBoard(); // Render the board without updating lanes and regions
           const winner = checkWinner();
@@ -430,6 +431,8 @@ function makeMove(cellIndex) {
       renderBoard(); // Render the board with updated currentPlayer
       alert('Incorrect answer. Turn skipped.');
       return;
+    
+    
     } else {
       alert('No trivia question found for this region and lane.');
       // No trivia question found, allow the player to place their marker
