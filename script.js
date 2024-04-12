@@ -34,7 +34,7 @@ const championData = {
   "Fiora": [
     { region: "Demacia", lane: "Toplane" }
   ],
-  "Gangkplank": [
+  "Gangplank": [
     { region: "Bilgewater", lane: "Toplane" }
   ],
   "Garen": [
@@ -394,7 +394,7 @@ const championData = {
 "Twisted Fate": [
   { region: "Bilgewater", lane: "Midlane" }
 ],
-"Veiger": [
+"Veigar": [
   { region: "BandleCity", lane: "Midlane" }
 ],
 "Vex": [
