@@ -19,7 +19,8 @@ const championData = {
     { region: "Ionia", lane: "Midlane" }
   ],
   "Camille": [
-    { region: "Piltover", lane: "Toplane" }
+    { region: "Piltover", lane: "Toplane" },
+    { region: "Piltover", lane: "Support" }
   ],
   "Cho'Gath": [
     { region: "Void", lane: "Toplane" }
@@ -98,7 +99,8 @@ const championData = {
     { region: "Freljord", lane: "Toplane" }
   ],
   "Pantheon": [
-    { region: "Targon", lane: "Toplane" }
+    { region: "Targon", lane: "Toplane" },
+    { region: "Targon", lane: "Support" }
   ],
   "Quinn": [
     { region: "Demacia", lane: "Toplane" }
@@ -182,7 +184,9 @@ const championData = {
   { region: "Void", lane: "Jungle" }
 ],
 "Brand": [
-  { region: "Freljord", lane: "Jungle" }
+  { region: "Freljord", lane: "Jungle" },
+  { region: "Freljord", lane: "Support" }
+  
 ],
 "Briar": [
   { region: "Noxus", lane: "Jungle" }
@@ -266,7 +270,8 @@ const championData = {
   { region: "Freljord", lane: "Jungle" }
 ],
 "Shaco": [
-  { region: "?", lane: "Jungle" }
+  { region: "?", lane: "Jungle" },
+  { region: "?", lane: "Support" }
 ],
 "Shyvana": [
   { region: "Demacia", lane: "Jungle" }
@@ -326,10 +331,12 @@ const championData = {
   { region: "Demacia", lane: "Midlane" }
 ],
 "Hwei": [
-  { region: "Ionia", lane: "Midlane" }
+  { region: "Ionia", lane: "Midlane" },
+  { region: "Ionia", lane: "Support" }
 ],
 "Karma": [
-  { region: "Ionia", lane: "Midlane" }
+  { region: "Ionia", lane: "Midlane" },
+  { region: "Ionia", lane: "Support" }
 ],
 "Kassadin": [
   { region: "Void", lane: "Midlane" }
@@ -354,7 +361,9 @@ const championData = {
   { region: "Darken", lane: "Midlane" }
 ],
 "Neeko": [
-  { region: "Ionia", lane: "Midlane" }
+  { region: "Ionia", lane: "Midlane" },
+  { region: "Ionia", lane: "Support" }
+
 ],
 "Orianna": [
   { region: "Piltover", lane: "Midlane" }
@@ -398,7 +407,8 @@ const championData = {
   { region: "Darken", lane: "Midlane" }
 ],
 "Xerath": [
-  { region: "Shurima", lane: "Midlane" }
+  { region: "Shurima", lane: "Midlane" },
+  { region: "Shurima", lane: "Support" }
 ],
 "Zed": [
   { region: "Ionia", lane: "Midlane" }
@@ -411,7 +421,9 @@ const championData = {
   { region: "Targon", lane: "Botlane" }
 ],
 "Ashe": [
-  { region: "Freljord", lane: "Botlane" }
+  { region: "Freljord", lane: "Botlane" },
+  { region: "Freljord", lane: "Support" }
+  
 ],
 "Caitlyn": [
   { region: "Piltover", lane: "Botlane" }
@@ -450,7 +462,9 @@ const championData = {
   { region: "Noxus", lane: "Botlane" }
 ],
 "Senna": [
-  { region: "?", lane: "Botlane" }
+  { region: "?", lane: "Botlane" },
+  { region: "?", lane: "Support" }
+ 
 ],
 "Sivir": [
   { region: "Shurima", lane: "Botlane" }
@@ -471,6 +485,86 @@ const championData = {
 "Ziggs": [
   { region: "Zaun", lane: "Botlane" }
 ],
+//Suport
+"Alistar": [
+  { region: "?", lane: "Support" }
+],
+"Bard": [
+  { region: "Targon", lane: "Support" }
+],
+"Blitzcrank": [
+  { region: "Piltover", lane: "Support" }
+],
+"Braum": [
+  { region: "Freljord", lane: "Support" }
+],
+"Janna": [
+  { region: "Zaun", lane: "Support" }
+],
+"Leona": [
+  { region: "Targon", lane: "Support" }
+],
+"Lulu": [
+  { region: "BandleCity", lane: "Support" }
+],
+"Maokai": [
+  { region: "ShadowIsles", lane: "Support" }
+],
+"Milio": [
+  { region: "Ixtal", lane: "Support" }
+],
+"Morgana": [
+  { region: "Demacia", lane: "Support" }
+],
+"Nami": [
+  { region: "Bilgewater", lane: "Support" }
+],
+"Nautilus": [
+  { region: "Bilgewater", lane: "Support" }
+],
+"Pyke": [
+  { region: "Bilgewater", lane: "Support" }
+],
+"Rakan": [
+  { region: "Ionia", lane: "Support" }
+],
+"Rell": [
+  { region: "Noxus", lane: "Support" }
+],
+"Renata Glasc": [
+  { region: "Zaun", lane: "Support" }
+],
+"Seraphine": [
+  { region: "Piltover", lane: "Support" }
+],
+"Sona": [
+  { region: "Demacia", lane: "Support" }
+],
+"Soraka": [
+  { region: "Targon", lane: "Support" }
+],
+"Swain": [
+  { region: "Noxus", lane: "Support" }
+],
+"Taric": [
+  { region: "Targon", lane: "Support" }
+],
+"Thresh": [
+  { region: "ShadowIsles", lane: "Support" }
+],
+"Vel'Koz": [
+  { region: "Void", lane: "Support" }
+],
+"Yuumi": [
+  { region: "BandleCity", lane: "Support" }
+],
+"Zilean": [
+  { region: "Shurima", lane: "Support" }
+],
+"Zyra": [
+  { region: "Ixtal", lane: "Support" }
+],
+
 
 
 
