@@ -434,7 +434,7 @@ function makeMove(cellIndex) {
       renderBoard(); // Render the board with updated currentPlayer
       alert('Incorrect answer. Turn skipped.');
       return;
-    
+    //u like weiner?
     
     } else {
       alert('No trivia question found for this region and lane.');
