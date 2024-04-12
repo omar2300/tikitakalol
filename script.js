@@ -151,14 +151,17 @@ const championData = {
     { region: "Zaun", lane: "Toplane" }
   ],
   "Vayne": [
-    { region: "Demacia", lane: "Toplane" }
+    { region: "Demacia", lane: "Toplane" },
+    { region: "Demacia", lane: "Botlane" }
+
   ],
   "Volibear": [
     { region: "Freljord", lane: "Toplane" }
   ],
   "Yasuo": [
     { region: "Ionia", lane: "Toplane" },
-    { region: "Ionia", lane: "Midlane" }
+    { region: "Ionia", lane: "Midlane" },
+    { region: "Ionia", lane: "Botlane" }
   ],
   "Yone": [
     { region: "Ionia", lane: "Toplane" },
@@ -363,7 +366,8 @@ const championData = {
   { region: "?", lane: "Midlane" }
 ],
 "Smolder": [
-  { region: "?", lane: "Midlane" }
+  { region: "?", lane: "Midlane" },
+  { region: "?", lane: "Botlane" }
 ],
 "Sylas": [
   { region: "Demacia", lane: "Midlane" }
@@ -375,7 +379,8 @@ const championData = {
   { region: "Noxus", lane: "Midlane" }
 ],
 "Tristana": [
-  { region: "BandleCity", lane: "Midlane" }
+  { region: "BandleCity", lane: "Midlane" },
+  { region: "BandleCity", lane: "Botlane" }
 ],
 "Twisted Fate": [
   { region: "Bilgewater", lane: "Midlane" }
@@ -401,16 +406,75 @@ const championData = {
 "Zoe": [
   { region: "Targon", lane: "Midlane" }
 ],
-
-
-
-
-
-
-
+//Botlane
+"Apheleos": [
+  { region: "Targon", lane: "Botlane" }
+],
+"Ashe": [
+  { region: "Freljord", lane: "Botlane" }
+],
+"Caitlyn": [
+  { region: "Piltover", lane: "Botlane" }
+],
+"Draven": [
+  { region: "Noxus", lane: "Botlane" }
+],
+"Ezreal": [
+  { region: "Piltover", lane: "Botlane" }
+],
 "Jhin": [
  { region: "Ionia", lane: "Botlane" }
 ],
+"Jinx": [
+  { region: "Zaun", lane: "Botlane" }
+],
+"Kai'Sa": [
+  { region: "Void", lane: "Botlane" }
+],
+"Kalista": [
+  { region: "ShadowIsles", lane: "Botlane" }
+],
+"Kog'Maw": [
+  { region: "Void", lane: "Botlane" }
+],
+"Lucian": [
+  { region: "?", lane: "Botlane" }
+],
+"Miss Fortune": [
+  { region: "Bilgewater", lane: "Botlane" }
+],
+"Nilah": [
+  { region: "Bilgewater", lane: "Botlane" }
+],
+"Samira": [
+  { region: "Noxus", lane: "Botlane" }
+],
+"Senna": [
+  { region: "?", lane: "Botlane" }
+],
+"Sivir": [
+  { region: "Shurima", lane: "Botlane" }
+],
+"Twitch": [
+  { region: "Zaun", lane: "Botlane" }
+],
+"Varus": [
+  { region: "Ionia", lane: "Botlane" }
+],
+//xavier
+"Xayah": [
+  { region: "Ionia", lane: "Botlane" }
+],
+"Zeri": [
+  { region: "Zaun", lane: "Botlane" }
+],
+"Ziggs": [
+  { region: "Zaun", lane: "Botlane" }
+],
+
+
+
+
 
 
   // Add more champion data here
