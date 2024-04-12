@@ -564,13 +564,6 @@ const championData = {
 "Zyra": [
   { region: "Ixtal", lane: "Support" }
 ],
-
-
-
-
-
-
-
   // Add more champion data here
 };
 
