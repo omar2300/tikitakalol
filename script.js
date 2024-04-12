@@ -426,6 +426,9 @@ function makeMove(cellIndex) {
           }
           return;
         }
+      } if (playerAnswer === null) {
+        // Player cancelled, do nothing
+        return;
       }
       currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
       renderBoard(); // Render the board with updated currentPlayer
