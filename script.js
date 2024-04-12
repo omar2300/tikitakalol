@@ -157,10 +157,12 @@ const championData = {
     { region: "Freljord", lane: "Toplane" }
   ],
   "Yasuo": [
-    { region: "Ionia", lane: "Toplane" }
+    { region: "Ionia", lane: "Toplane" },
+    { region: "Ionia", lane: "Midlane" }
   ],
   "Yone": [
-    { region: "Ionia", lane: "Toplane" }
+    { region: "Ionia", lane: "Toplane" },
+    { region: "Ionia", lane: "Midlane" }
   ],
   "Yorick": [
     { region: "ShadowIsles", lane: "Toplane" }
@@ -270,7 +272,8 @@ const championData = {
   { region: "Ixtal", lane: "Jungle" }
 ],
 "Taliyah": [
-  { region: "Shurima", lane: "Jungle" }
+  { region: "Shurima", lane: "Jungle" },
+  { region: "Shurima", lane: "Midlane" }
 ],
 "Vi": [
   { region: "Piltover", lane: "Jungle" }
@@ -328,6 +331,77 @@ const championData = {
 "Kassadin": [
   { region: "Void", lane: "Midlane" }
 ],
+"Katarina": [
+  { region: "Noxus", lane: "Midlane" }
+],
+"LeBlanc": [
+  { region: "Noxus", lane: "Midlane" }
+],
+"Lissandra": [
+  { region: "Freljord", lane: "Midlane" }
+],
+"Lux": [
+  { region: "Demacia", lane: "Midlane" },
+  { region: "Demacia", lane: "Support" }
+],
+"Malzahar": [
+  { region: "void", lane: "Midlane" }
+],
+"Naafiri": [
+  { region: "Darken", lane: "Midlane" }
+],
+"Neeko": [
+  { region: "Ionia", lane: "Midlane" }
+],
+"Orianna": [
+  { region: "Piltover", lane: "Midlane" }
+],
+"Qiyana": [
+  { region: "ixtal", lane: "Midlane" }
+],
+"Ryze": [
+  { region: "?", lane: "Midlane" }
+],
+"Smolder": [
+  { region: "?", lane: "Midlane" }
+],
+"Sylas": [
+  { region: "Demacia", lane: "Midlane" }
+],
+"Syndra": [
+  { region: "Ionia", lane: "Midlane" }
+],
+"Talon": [
+  { region: "Noxus", lane: "Midlane" }
+],
+"Tristana": [
+  { region: "BandleCity", lane: "Midlane" }
+],
+"Twisted Fate": [
+  { region: "Bilgewater", lane: "Midlane" }
+],
+"Veiger": [
+  { region: "BandleCity", lane: "Midlane" }
+],
+"Vex": [
+  { region: "ShadowIsles", lane: "Midlane" }
+],
+"Victor": [
+  { region: "Piltover", lane: "Midlane" }
+],
+"Vladimir": [
+  { region: "Darken", lane: "Midlane" }
+],
+"Xerath": [
+  { region: "Shurima", lane: "Midlane" }
+],
+"Zed": [
+  { region: "Ionia", lane: "Midlane" }
+],
+"Zoe": [
+  { region: "Targon", lane: "Midlane" }
+],
+
 
 
 
@@ -338,10 +412,7 @@ const championData = {
  { region: "Ionia", lane: "Botlane" }
 ],
 
-  "Lux": [
-    { region: "Demacia", lane: "Midlane" },
-    { region: "Demacia", lane: "Support" }
-  ],
+
   // Add more champion data here
 };
 
@@ -434,7 +505,6 @@ function makeMove(cellIndex) {
       renderBoard(); // Render the board with updated currentPlayer
       alert('Incorrect answer. Turn skipped.');
       return;
-    //u like weiner?
     
     } else {
       alert('No trivia question found for this region and lane.');
