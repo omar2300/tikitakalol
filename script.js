@@ -261,7 +261,7 @@ const championData = {
 "Rammus": [
   { region: "Shurima", lane: "Jungle" }
 ],
-"Renger": [
+"Rengar": [
   { region: "Ixtal", lane: "Jungle" }
 ],
 "Sejuani": [
