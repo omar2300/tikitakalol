@@ -103,8 +103,8 @@ const championData = {
     { region: "Demacia", lane: "Toplane" }
   ],
   "Rek'Sai": [
-    { region: "void", lane: "Toplane" },
-    { region: "void", lane: "Jungle"}
+    { region: "Void", lane: "Toplane" },
+    { region: "Void", lane: "Jungle"}
   ],
   "Renekton": [
     { region: "Shurima", lane: "Toplane" }
@@ -256,6 +256,7 @@ const championData = {
 ],
 "Poppy": [
   { region: "Demacia", lane: "Jungle" }
+
 ],
 "Rammus": [
   { region: "Shurima", lane: "Jungle" }
@@ -308,7 +309,7 @@ const championData = {
 "Annie": [
   { region: "?", lane: "Midlane" }
 ],
-"Aurelian Sol": [
+"Aurelion Sol": [
   { region: "Targon", lane: "Midlane" }
 ],
 "Azir": [
@@ -352,21 +353,20 @@ const championData = {
   { region: "Demacia", lane: "Support" }
 ],
 "Malzahar": [
-  { region: "void", lane: "Midlane" }
+  { region: "Void", lane: "Midlane" }
 ],
 "Naafiri": [
   { region: "Darkin", lane: "Midlane" }
 ],
 "Neeko": [
-  { region: "Ionia", lane: "Midlane" },
-  { region: "Ionia", lane: "Support" }
-
+  { region: "Ixtal", lane: "Midlane" },
+  { region: "Ixtal", lane: "Support" }
 ],
 "Orianna": [
   { region: "Piltover", lane: "Midlane" }
 ],
 "Qiyana": [
-  { region: "ixtal", lane: "Midlane" }
+  { region: "Ixtal", lane: "Midlane" }
 ],
 "Ryze": [
   { region: "?", lane: "Midlane" }
@@ -397,11 +397,12 @@ const championData = {
 "Vex": [
   { region: "ShadowIsles", lane: "Midlane" }
 ],
-"Victor": [
-  { region: "Piltover", lane: "Midlane" }
+"Viktor": [
+  { region: "Zaun", lane: "Midlane" }
 ],
 "Vladimir": [
-  { region: "Darkin", lane: "Midlane" }
+  { region: "Noxus", lane: "Midlane" }
+
 ],
 "Xerath": [
   { region: "Shurima", lane: "Midlane" },
@@ -447,7 +448,7 @@ const championData = {
   { region: "Void", lane: "Botlane" }
 ],
 "Lucian": [
-  { region: "?", lane: "Botlane" }
+  { region: "Demacia", lane: "Botlane" }
 ],
 "Miss Fortune": [
   { region: "Bilgewater", lane: "Botlane" }
