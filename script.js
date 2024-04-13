@@ -6,13 +6,13 @@ const O_MARKER = 'O';
 let currentPlayer = X_MARKER;
 let board = ['', '', '', '', '', '', '', '', ''];
 
-const allRegions = ['Ionia', 'Demacia', 'Piltover', 'Noxus', 'Void','Darken','Zaun','Bilgewater','Freljord','ShadowIsles','Shurima','Ixtal','Targon','BandleCity','?'];
+const allRegions = ['Ionia', 'Demacia', 'Piltover', 'Noxus', 'Void','Darkin','Zaun','Bilgewater','Freljord','ShadowIsles','Shurima','Ixtal','Targon','BandleCity','?'];
 const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 // Champion data with regions and lanes
 const championData = {
   //Toplane
-  "Atrox": [
-    { region: "Darken", lane: "Toplane" }
+  "Aatrox": [
+    { region: "Darkin", lane: "Toplane" }
   ],
   "Akali": [
     { region: "Ionia", lane: "Toplane" },
@@ -73,9 +73,6 @@ const championData = {
   ],
   "Kayle": [
     { region: "Demacia", lane: "Toplane" }
-  ],
-  "Kennen": [
-    { region: "Ionia", lane: "Toplane" }
   ],
   "Kennen": [
     { region: "Ionia", lane: "Toplane" }
@@ -228,7 +225,7 @@ const championData = {
   { region: "Ionia", lane: "Jungle" }
 ],
 "Rhaast": [
-  { region: "Darken", lane: "Jungle" }
+  { region: "Darkin", lane: "Jungle" }
 ],
 "Kha'Zix": [
   { region: "Void", lane: "Jungle" }
@@ -358,7 +355,7 @@ const championData = {
   { region: "void", lane: "Midlane" }
 ],
 "Naafiri": [
-  { region: "Darken", lane: "Midlane" }
+  { region: "Darkin", lane: "Midlane" }
 ],
 "Neeko": [
   { region: "Ionia", lane: "Midlane" },
@@ -404,7 +401,7 @@ const championData = {
   { region: "Piltover", lane: "Midlane" }
 ],
 "Vladimir": [
-  { region: "Darken", lane: "Midlane" }
+  { region: "Darkin", lane: "Midlane" }
 ],
 "Xerath": [
   { region: "Shurima", lane: "Midlane" },
@@ -417,7 +414,7 @@ const championData = {
   { region: "Targon", lane: "Midlane" }
 ],
 //Botlane
-"Apheleos": [
+"Aphelios": [
   { region: "Targon", lane: "Botlane" }
 ],
 "Ashe": [
@@ -473,7 +470,7 @@ const championData = {
   { region: "Zaun", lane: "Botlane" }
 ],
 "Varus": [
-  { region: "Ionia", lane: "Botlane" }
+  { region: "Darkin", lane: "Botlane" }
 ],
 //xavier
 "Xayah": [
