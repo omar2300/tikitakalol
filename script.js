@@ -121,9 +121,6 @@ const championData = {
   "Shen": [
     { region: "Ionia", lane: "Toplane" }
   ],
-  "Shen": [
-    { region: "Ionia", lane: "Toplane" }
-  ],
   "Singed": [
     { region: "Zaun", lane: "Toplane" }
   ],
@@ -237,9 +234,6 @@ const championData = {
   { region: "Ionia", lane: "Jungle" }
 ],
 "Lillia": [
-  { region: "Ionia", lane: "Jungle" }
-],
-"Lee Sin": [
   { region: "Ionia", lane: "Jungle" }
 ],
 "Master Yi": [
