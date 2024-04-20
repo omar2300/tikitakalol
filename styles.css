@@ -46,9 +46,49 @@
   flex-direction: column;
   align-items: center;
 }
+/* Styling for the first cell */
+.lanes .cell:first-child {
+  width: 100px; /* Set the width to match other cells */
+  margin-bottom: 10px;
+}
+
 
 /* Styling for the columns */
 .column {
   display: inline-block;
   vertical-align: top;
+}
+
+/* Styling for the popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 1000;
+}
+
+/* Styling for the input field */
+.popup input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styling for the button */
+.popup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
 }
