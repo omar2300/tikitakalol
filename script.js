@@ -12,7 +12,7 @@ const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 const championData = {
   //Toplane
   "Aatrox": [
-    { region: "Darkin", lane: "Toplane" }
+    { region: "Darkin", lane: "Toplane",image: "/home/omar2300/tikitakalol/ChampionIMG/AatroxSquare.jpg" }
   ],
   "Akali": [
     { region: "Ionia", lane: "Toplane" },
@@ -756,7 +756,29 @@ function renderBoard() {
     cell.addEventListener('click', () => makeMove(i));
     boardContainer.lastChild.appendChild(cell);
   }
+// Update the datalist options with images
+const datalist = document.getElementById('championList');
+datalist.innerHTML = Object.entries(championData)
+  .map(([champion, data]) => {
+    const options = data.map(({ region, lane, image }) => {
+      return `<option value="${champion}" style="background-image: url('${image}');">${champion}</option>`;
+    });
+    return options.join('');
+  })
+  .join('');
+ 
+   // Add options dynamically based on championData
+   for (const champion in championData) {
+     const option = document.createElement('option');
+     option.value = champion;
+     if (championData[champion].image) {
+       option.setAttribute('data-image', championData[champion].image);
+     }
+     championList.appendChild(option);
+   }
+ 
 }
+
 
 // Initialize the game
 renderBoard();

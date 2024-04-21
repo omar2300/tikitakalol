@@ -114,3 +114,9 @@ button:hover {
   cursor: pointer;
 }
 
+/* CSS to style the datalist options with background images */
+datalist option {
+  padding-left: 20px; /* Adjust as needed */
+  background-size: contain; /* Adjust as needed */
+  background-repeat: no-repeat;
+}
