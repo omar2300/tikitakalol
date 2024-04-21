@@ -69,7 +69,7 @@ body {
 /* Modal styles */
 .modal {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: fixed;
   z-index: 1;
@@ -84,10 +84,20 @@ body {
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
-  border-radius: 5px;
-  width: 300px;
+  border-radius: 20px;
+  width: 400px;
 }
-
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
 .close {
   color: #aaa;
   float: right;
@@ -103,16 +113,3 @@ body {
   cursor: pointer;
 }
 
-#playerAnswer {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-#submitAnswer {
-  margin-right: 5px;
-}
-
-#cancelAnswer {
-  background-color: #f44336;
-  color: white;
-}
