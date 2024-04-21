@@ -6,7 +6,7 @@ const O_MARKER = 'O';
 let currentPlayer = X_MARKER;
 let board = ['', '', '', '', '', '', '', '', ''];
 
-const allRegions = ['Ionia', 'Demacia', 'Piltover', 'Noxus', 'Void','Darkin','Zaun','Bilgewater','Freljord','ShadowIsles','Shurima','Ixtal','Targon','BandleCity','?'];
+const allRegions = ['Ionia', 'Demacia', 'Piltover', 'Noxus', 'Void','Darkin','Zaun','Bilgewater','Freljord','ShadowIsles','Shurima','Ixtal','Targon','BandleCity','Unknown'];
 const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 // Champion data with regions and lanes
 const championData = {
@@ -197,11 +197,11 @@ const championData = {
   { region: "ShadowIsles", lane: "Jungle" }
 ],
 "Evelynn": [
-  { region: "?", lane: "Jungle" }
+  { region: "Unknown", lane: "Jungle" }
 ],
 //not working 
 "Fiddlesticks": [
-  { region: "?", lane: "Jungle" }
+  { region: "Unknown", lane: "Jungle" }
 ],
 "Graves": [
   { region: "Bilgewater", lane: "Jungle" }
@@ -228,7 +228,7 @@ const championData = {
   { region: "Void", lane: "Jungle" }
 ],
 "Kindred": [
-  { region: "?", lane: "Jungle" }
+  { region: "Unknown", lane: "Jungle" }
 ],
 "Lee Sin": [
   { region: "Ionia", lane: "Jungle" }
@@ -243,7 +243,7 @@ const championData = {
   { region: "Ionia", lane: "Jungle" }
 ],
 "Nocturne": [
-  { region: "?", lane: "Jungle" }
+  { region: "Unknown", lane: "Jungle" }
 ],
 "Nunu & Wilump": [
   { region: "Freljord", lane: "Jungle" }
@@ -262,8 +262,8 @@ const championData = {
   { region: "Freljord", lane: "Jungle" }
 ],
 "Shaco": [
-  { region: "?", lane: "Jungle" },
-  { region: "?", lane: "Support" }
+  { region: "Unknown", lane: "Jungle" },
+  { region: "Unknown", lane: "Support" }
 ],
 "Shyvana": [
   { region: "Demacia", lane: "Jungle" }
@@ -288,7 +288,7 @@ const championData = {
   { region: "Ionia", lane: "Jungle" }
 ],
 "Xin Zhao": [
-  { region: "?", lane: "Jungle" }
+  { region: "Unknown", lane: "Jungle" }
 ],
 //Midlane 
 "Ahri": [
@@ -301,7 +301,7 @@ const championData = {
   { region: "Freljord", lane: "Midlane" }
 ],
 "Annie": [
-  { region: "?", lane: "Midlane" }
+  { region: "Unknown", lane: "Midlane" }
 ],
 "Aurelion Sol": [
   { region: "Targon", lane: "Midlane" }
@@ -363,11 +363,11 @@ const championData = {
   { region: "Ixtal", lane: "Midlane" }
 ],
 "Ryze": [
-  { region: "?", lane: "Midlane" }
+  { region: "Unknown", lane: "Midlane" }
 ],
 "Smolder": [
-  { region: "?", lane: "Midlane" },
-  { region: "?", lane: "Botlane" }
+  { region: "Unknown", lane: "Midlane" },
+  { region: "Unknown", lane: "Botlane" }
 ],
 "Sylas": [
   { region: "Demacia", lane: "Midlane" }
@@ -454,8 +454,8 @@ const championData = {
   { region: "Noxus", lane: "Botlane" }
 ],
 "Senna": [
-  { region: "?", lane: "Botlane" },
-  { region: "?", lane: "Support" }
+  { region: "Unknown", lane: "Botlane" },
+  { region: "Unknown", lane: "Support" }
  
 ],
 "Sivir": [
@@ -479,7 +479,7 @@ const championData = {
 ],
 //Suport
 "Alistar": [
-  { region: "?", lane: "Support" }
+  { region: "Unknown", lane: "Support" }
 ],
 "Bard": [
   { region: "Targon", lane: "Support" }
