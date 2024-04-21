@@ -66,36 +66,53 @@ body {
   vertical-align: top;
 }
 
-/* Styling for the popup */
-.popup {
+/* Modal styles */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  z-index: 1000;
-}
-
-/* Styling for the input field */
-.popup input[type="text"] {
+  z-index: 1;
+  left: 0;
+  top: 0;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Styling for the button */
-.popup button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
   border-radius: 5px;
+  width: 300px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.popup button:hover {
-  background-color: #0056b3;
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#playerAnswer {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#submitAnswer {
+  margin-right: 5px;
+}
+
+#cancelAnswer {
+  background-color: #f44336;
+  color: white;
 }
