@@ -619,64 +619,85 @@ function makeMove(cellIndex) {
       (q) => q.region === region && q.lane === lane
     );
 
-    // Use a custom modal instead of prompt
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    modal.innerHTML = `
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <label for="championInput">${questionObj.question}</label>
-        <input list="championList" id="championInput" />
-        <datalist id="championList">
-          <!-- Add options dynamically based on championData -->
-          ${Object.keys(championData)
-            .map((champion) => `<option value="${champion}"></option>`)
-            .join('')}
-        </datalist>
-        <button id="confirmBtn">Confirm</button>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    // Close the modal when the close button is clicked
-    const closeButton = modal.querySelector('.close');
-    closeButton.addEventListener('click', () => {
-      document.body.removeChild(modal);
-    });
-
-    // Confirm the selected champion when the confirm button is clicked
-    const confirmButton = modal.querySelector('#confirmBtn');
-    confirmButton.addEventListener('click', () => {
-      const selectedChampion = document.getElementById('championInput').value;
-      const correctAnswers = trivia
+    const correctAnswers = questionObj ? 
+      trivia
         .filter((q) => q.region === region && q.lane === lane)
-        .map((q) => q.answer.toLowerCase().trim());
+        .map((q) => q.answer.toLowerCase().trim()) 
+      : [];
 
-      if (correctAnswers.includes(selectedChampion.toLowerCase().trim())) {
-        board[cellIndex] = currentPlayer;
-        renderBoard(); // Render the board without updating lanes and regions
-        const winner = checkWinner();
-        if (winner) {
-          alert(`Player ${winner} wins!`);
-          resetGame();
-        } else if (!board.includes('')) {
-          alert("It's a draw!");
-          resetGame();
-        } else {
-          currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
-          renderBoard(); // Render the board with updated currentPlayer
-        }
+    if (correctAnswers.length === 0) {
+      // If there are no possible answers, give the point directly
+      board[cellIndex] = currentPlayer;
+      renderBoard(); // Render the board without updating lanes and regions
+      const winner = checkWinner();
+      if (winner) {
+        alert(`Player ${winner} wins!`);
+        resetGame();
+      } else if (!board.includes('')) {
+        alert("It's a draw!");
+        resetGame();
       } else {
-        alert('Incorrect answer. Turn skipped.');
         currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
         renderBoard(); // Render the board with updated currentPlayer
       }
+    } else {
+      // Use a custom modal instead of prompt
+      const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <label for="championInput">${questionObj.question}</label>
+          <input list="championList" id="championInput" />
+          <datalist id="championList">
+            <!-- Add options dynamically based on championData -->
+            ${Object.keys(championData)
+              .map((champion) => `<option value="${champion}"></option>`)
+              .join('')}
+          </datalist>
+          <button id="confirmBtn">Confirm</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
 
-      // Remove the modal from the DOM
-      document.body.removeChild(modal);
-    });
+      // Close the modal when the close button is clicked
+      const closeButton = modal.querySelector('.close');
+      closeButton.addEventListener('click', () => {
+        document.body.removeChild(modal);
+      });
+
+      // Confirm the selected champion when the confirm button is clicked
+      const confirmButton = modal.querySelector('#confirmBtn');
+      confirmButton.addEventListener('click', () => {
+        const selectedChampion = document.getElementById('championInput').value;
+
+        if (correctAnswers.includes(selectedChampion.toLowerCase().trim())) {
+          board[cellIndex] = currentPlayer;
+          renderBoard(); // Render the board without updating lanes and regions
+          const winner = checkWinner();
+          if (winner) {
+            alert(`Player ${winner} wins!`);
+            resetGame();
+          } else if (!board.includes('')) {
+            alert("It's a draw!");
+            resetGame();
+          } else {
+            currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
+            renderBoard(); // Render the board with updated currentPlayer
+          }
+        } else {
+          alert('Incorrect answer. Turn skipped.');
+          currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
+          renderBoard(); // Render the board with updated currentPlayer
+        }
+
+        // Remove the modal from the DOM
+        document.body.removeChild(modal);
+      });
+    }
   }
 }
+
 
 
 // Function to reset the game
