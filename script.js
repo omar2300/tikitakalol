@@ -12,7 +12,7 @@ const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 const championData = {
   //Toplane
   "Aatrox": [
-    { region: "Darkin", lane: "Toplane",image: "/home/omar2300/tikitakalol/ChampionIMG/AatroxSquare.jpg" }
+    { region: "Darkin", lane: "Toplane", image: "/home/omar2300/tikitakalol/ChampionIMG/AatroxSquare.jpg" }
   ],
   "Akali": [
     { region: "Ionia", lane: "Toplane" },
