@@ -1,9 +1,10 @@
 /* Styling for the cell */
 body {
   background-image: url('./Beautiful-league-of-legends-wallpaper_111229615_289.JPG');
-  background-size: flex; /* Maintain the original size of the background image */
+  background-size: cover; /* Maintain the original size of the background image */
   background-position: center top; /* Center the background image horizontally and align it to the top vertically */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-attachment: fixed; /* Keep the background fixed while scrolling */
 }
 
 .cell {
