@@ -1,6 +1,6 @@
 /* Styling for the cell */
 body {
-  background-image: url('Beautiful-league-of-legends-wallpaper_111229615_289.JPG');
+  background-image: url('./Beautiful-league-of-legends-wallpaper_111229615_289.JPG');
   background-size: auto; /* Maintain the original size of the background image */
   background-position: center top; /* Center the background image horizontally and align it to the top vertically */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
