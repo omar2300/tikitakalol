@@ -660,6 +660,11 @@ function makeMove(cellIndex) {
       `;
       document.body.appendChild(modal);
 
+      
+      
+      // Focus on the input element when the modal is closed
+      document.getElementById('championInput').focus();
+
       // Close the modal when the close button is clicked
       const closeButton = modal.querySelector('.close');
       closeButton.addEventListener('click', () => {
@@ -694,6 +699,7 @@ function makeMove(cellIndex) {
         // Remove the modal from the DOM
         document.body.removeChild(modal);
       });
+      
     }
   }
 }
@@ -766,6 +772,7 @@ datalist.innerHTML = Object.entries(championData)
     return options.join('');
   })
   .join('');
+  
  
    // Add options dynamically based on championData
    for (const champion in championData) {
