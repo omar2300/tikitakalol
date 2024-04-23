@@ -628,7 +628,8 @@ function makeMove(cellIndex) {
     if (correctAnswers.length === 0) {
       // If there are no possible answers, give the point directly
       board[cellIndex] = currentPlayer;
-      renderBoard(); // Render the board without updating lanes and regions
+      currentPlayer = currentPlayer === X_MARKER ? O_MARKER : X_MARKER;
+        renderBoard(); // Render the board with updated currentPlayer
       const winner = checkWinner();
       if (winner) {
         alert(`Player ${winner} wins!`);
