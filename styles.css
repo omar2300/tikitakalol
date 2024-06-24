@@ -1,76 +1,139 @@
-/* Styling for the cell */
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-image: url('./Beautiful-league-of-legends-wallpaper_111229615_289.JPG');
-  background-size: cover; /* Maintain the original size of the background image */
-  background-position: center top; /* Center the background image horizontally and align it to the top vertically */
-  background-repeat: no-repeat; /* Prevent the background image from repeating */
-  background-attachment: fixed; /* Keep the background fixed while scrolling */
-}
-
-.cell {
-  width: 100px;
-  height: 100px;
-  border: 1px solid rgb(58, 58, 58);
-  display: inline-block;
-  font-size: 1.5em;
-  text-align: center;
-  line-height: 100px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  vertical-align: top; /* Align cells at the top */
-  background-color: #ccc;
-}
-
-.cell:hover {
-  background-color: #f0f0f0; /* Light gray background color on hover */
-}
-
-/* Styling for the board */
-#board {
-  width: 420px; /* Total width of the grid (4 cells * cell width + 2px border + 20px margin) */
-  margin: 20px auto; /* Center the board horizontally */
-  overflow: hidden; /* Clearfix for the floated elements */
-}
-
-/* Styling for the rows */
-.row::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-/* Styling for the regions */
-.regions {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px; /* Add some space below the regions */
-}
-
-/* Styling for the lanes */
-.lanes {
-  float: left;
-  margin-right: 10px;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-/* Styling for the first cell */
-.lanes .cell:first-child {
-  width: 100px; /* Set the width to match other cells */
-  margin-bottom: 10px;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 
-/* Styling for the columns */
-.column {
-  display: inline-block;
-  vertical-align: top;
+
+/* Game board */
+#board {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr);
+  grid-template-rows: auto repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Cell styles */
+.cell {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #c9aa71;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #c9aa71;
+}
+
+/* Regions row */
+.regions {
+  grid-column: 2 / span 3;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Lanes column */
+.lanes {
+  grid-column: 1;
+  grid-row: 2 / span 3;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Current player cell */
+.current-player {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* Game grid */
+.game-grid {
+  grid-column: 2 / span 3;
+  grid-row: 2 / span 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+.cell:hover {
+  background-color: rgba(201, 170, 113, 0.2);
+}
+
+/* Regions row */
+.regions {
+  grid-column: 2 / span 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Lanes column */
+.lanes {
+  grid-row: 2 / span 3;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Current player cell */
+.current-player {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* Regions and Lanes cells */
+.regions .cell, .lanes .cell {
+  background-color: rgba(201, 170, 113, 0.1);
+  border: none;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+/* Game grid */
+.game-grid {
+  grid-column: 2 / span 3;
+  grid-row: 2 / span 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
 }
 
 /* Modal styles */
 .modal {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   position: fixed;
   z-index: 1;
@@ -78,46 +141,67 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-content {
-  margin-top: 7%;
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  border-radius: 20px;
-  width: 400px;
+  background-color: #14213d;
+  padding: 30px;
+  border: 2px solid #c9aa71;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  color: #e0e0e0;
 }
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #0056b3;
-}
+
 .close {
-  color: #aaa;
+  color: #c9aa71;
   float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
+.close:hover {
+  color: #ffd700;
+}
+
+/* Form elements */
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+input {
+  background-color: #e0e0e0;
+  color: #14213d;
+}
+
+button {
+  background-color: #c9aa71;
+  color: #14213d;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* CSS to style the datalist options with background images */
-datalist option {
-  padding-left: 20px; /* Adjust as needed */
-  background-size: contain; /* Adjust as needed */
-  background-repeat: no-repeat;
+button:hover {
+  background-color: #ffd700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 1em;
+  }
+  
+  #board {
+    padding: 10px;
+  }
 }

@@ -606,19 +606,15 @@ function checkWinner() {
 // Function to handle player moves
 function makeMove(cellIndex) {
   if (board[cellIndex] === '') {
-    // Find the region and lane associated with the selected cell
-    const row = Math.floor(cellIndex / 3); // Row index
-    const col = cellIndex % 3; // Column index
-    const region =
-      document.getElementsByClassName('regions')[0].children[col].textContent;
-    const lane =
-      document.getElementsByClassName('lanes')[0].children[row + 1].textContent;
+    const row = Math.floor(cellIndex / 3);
+    const col = cellIndex % 3;
+    const region = [reg1, reg2, reg3][col];
+    const lane = [lane1, lane2, lane3][row];
 
     // Find the trivia question associated with the selected region and lane
     const questionObj = trivia.find(
       (q) => q.region === region && q.lane === lane
     );
-
     const correctAnswers = questionObj ? 
       trivia
         .filter((q) => q.region === region && q.lane === lane)
@@ -723,25 +719,19 @@ function getRandomUniqueItems(array, n) {
   return shuffled.slice(0, n);
 }
 
-// Function to render the game board
 function renderBoard() {
   const boardContainer = document.getElementById('board');
   boardContainer.innerHTML = '';
 
-  // Display lanes on the left side
-  const lanesContainer = document.createElement('div');
-  lanesContainer.classList.add('lanes');
-  [currentPlayer, lane1, lane2, lane3].forEach((lane) => {
-    const laneCell = document.createElement('div');
-    laneCell.classList.add('cell');
-    laneCell.textContent = lane;
-    lanesContainer.appendChild(laneCell);
-  });
-  boardContainer.appendChild(lanesContainer);
+  // Current player cell (top-left corner)
+  const currentPlayerCell = document.createElement('div');
+  currentPlayerCell.classList.add('cell', 'current-player');
+  currentPlayerCell.textContent = currentPlayer;
+  boardContainer.appendChild(currentPlayerCell);
 
-  // Display regions on top
+  // Regions row (top)
   const regionsRow = document.createElement('div');
-  regionsRow.classList.add('row', 'regions');
+  regionsRow.classList.add('regions');
   [reg1, reg2, reg3].forEach((region) => {
     const regionCell = document.createElement('div');
     regionCell.classList.add('cell');
@@ -750,41 +740,41 @@ function renderBoard() {
   });
   boardContainer.appendChild(regionsRow);
 
-  // Render the game board
+  // Lanes column (left)
+  const lanesColumn = document.createElement('div');
+  lanesColumn.classList.add('lanes');
+  [lane1, lane2, lane3].forEach((lane) => {
+    const laneCell = document.createElement('div');
+    laneCell.classList.add('cell');
+    laneCell.textContent = lane;
+    lanesColumn.appendChild(laneCell);
+  });
+  boardContainer.appendChild(lanesColumn);
+
+  // Game grid (3x3)
+  const gameGrid = document.createElement('div');
+  gameGrid.classList.add('game-grid');
   for (let i = 0; i < 9; i++) {
-    if (i % 3 === 0) {
-      const column = document.createElement('div');
-      column.classList.add('column');
-      boardContainer.appendChild(column);
-    }
     const cell = document.createElement('div');
     cell.classList.add('cell');
     cell.textContent = board[i];
     cell.addEventListener('click', () => makeMove(i));
-    boardContainer.lastChild.appendChild(cell);
+    gameGrid.appendChild(cell);
   }
-// Update the datalist options with images
-const datalist = document.getElementById('championList');
-datalist.innerHTML = Object.entries(championData)
-  .map(([champion, data]) => {
-    const options = data.map(({ region, lane, image }) => {
-      return `<option value="${champion}" style="background-image: url('${image}');">${champion}</option>`;
-    });
-    return options.join('');
-  })
-  .join('');
-  
- 
-   // Add options dynamically based on championData
-   for (const champion in championData) {
-     const option = document.createElement('option');
-     option.value = champion;
-     if (championData[champion].image) {
-       option.setAttribute('data-image', championData[champion].image);
-     }
-     championList.appendChild(option);
-   }
- 
+  boardContainer.appendChild(gameGrid);
+
+  // Update the datalist options with images (if needed)
+  const datalist = document.getElementById('championList');
+  if (datalist) {
+    datalist.innerHTML = Object.entries(championData)
+      .map(([champion, data]) => {
+        const options = data.map(({ region, lane, image }) => {
+          return `<option value="${champion}" style="background-image: url('${image}');">${champion}</option>`;
+        });
+        return options.join('');
+      })
+      .join('');
+  }
 }
 
 
