@@ -240,7 +240,7 @@ const championData = {
   { region: "Ionia", lane: "Jungle" }
 ],
 "Nidalee": [
-  { region: "Ionia", lane: "Jungle" }
+  { region: "Ixtal", lane: "Jungle" }
 ],
 "Nocturne": [
   { region: "Unknown", lane: "Jungle" }
