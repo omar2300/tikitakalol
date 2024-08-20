@@ -309,6 +309,9 @@ const championData = {
 "Azir": [
   { region: "Shurima", lane: "Midlane" }
 ],
+"Aurora": [
+  { region: "Freljord", lane: "Midlane" }
+],
 "Cassiopeia": [
   { region: "Noxus", lane: "Midlane" }
 ],
