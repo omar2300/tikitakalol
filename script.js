@@ -352,6 +352,9 @@ const championData = {
 "Malzahar": [
   { region: "Void", lane: "Midlane" }
 ],
+"Mel": [
+  { region: "Noxus", lane: "Midlane" }
+],
 "Naafiri": [
   { region: "Darkin", lane: "Midlane" }
 ],
