@@ -189,6 +189,7 @@ function setOnlineStatus(message, tone = '') {
   }
 }
 
+// Client -> server transport helper. All online packets go through this.
 function sendOnlineMessage(payload) {
   if (!onlineSocket || onlineSocket.readyState !== WebSocket.OPEN) return;
   onlineSocket.send(JSON.stringify(payload));
@@ -213,6 +214,8 @@ function startOnlineMatchmaking() {
     return;
   }
 
+  // WebSocket lifecycle: open => join queue, message => state sync,
+  // close/error => reset client session UI/state.
   onlineSocket.addEventListener('open', () => {
     sendOnlineMessage({ type: 'join_random' });
   });
@@ -262,6 +265,8 @@ function teardownOnlineSession(statusMessage = 'Offline mode.') {
 }
 
 function handleOnlineMessage(data) {
+  // Server -> client protocol messages:
+  // queued, matched, opponent_selecting, move, turn_pass, opponent_left, error
   if (data.type === 'queued') {
     onlineQueued = true;
     setOnlineStatus('Searching for an opponent...', 'status-warn');
@@ -1007,6 +1012,7 @@ function makeMove(cellIndex) {
       finishTurn(`No valid answers there. ${movePlayer} gets the square.`);
 
       if (onlineModeEnabled && onlineMatched) {
+        // Authoritative board update packet for auto-claim cells.
         sendOnlineMessage({
           type: 'move',
           roomId: onlineRoomId,
@@ -1071,6 +1077,7 @@ function makeMove(cellIndex) {
           finishTurn(`Correct. ${movePlayer} claimed that square.`);
 
           if (onlineModeEnabled && onlineMatched) {
+            // Authoritative board update packet for a successful answer.
             sendOnlineMessage({
               type: 'move',
               roomId: onlineRoomId,
@@ -1085,6 +1092,7 @@ function makeMove(cellIndex) {
           finishTurn(`Wrong answer. ${missPlayer} loses the turn.`);
 
           if (onlineModeEnabled && onlineMatched) {
+            // Turn handoff packet when current player misses.
             sendOnlineMessage({
               type: 'turn_pass',
               roomId: onlineRoomId,

@@ -23,6 +23,7 @@ const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 
 const wss = new WebSocketServer({ port: PORT });
 let waitingClient = null;
+// roomId -> { players, board, currentPlayer, over }
 const rooms = new Map();
 
 function send(ws, payload) {
@@ -97,6 +98,7 @@ function removeClientFromRoom(ws, notifyOpponent = true) {
 }
 
 function handleJoinRandom(ws) {
+  // Simple random matchmaking: first player waits, second player creates a room.
   if (ws.roomId) {
     return;
   }
@@ -150,6 +152,7 @@ function handleJoinRandom(ws) {
 }
 
 function handleMove(ws, payload) {
+  // Server-authoritative move validation: turn, bounds, and cell occupancy.
   const roomId = ws.roomId;
   if (!roomId || !rooms.has(roomId)) {
     send(ws, { type: 'error', message: 'Room not found.' });
@@ -182,6 +185,7 @@ function handleMove(ws, payload) {
   room.board[cellIndex] = symbol;
   room.currentPlayer = symbol === 'X' ? 'O' : 'X';
 
+  // Broadcast the accepted move to both clients to keep states in sync.
   send(room.players.X, {
     type: 'move',
     roomId,
@@ -205,6 +209,7 @@ function handleMove(ws, payload) {
 }
 
 function handleTurnPass(ws) {
+  // Turn-pass is also server-authoritative to prevent client desync.
   const roomId = ws.roomId;
   if (!roomId || !rooms.has(roomId)) {
     send(ws, { type: 'error', message: 'Room not found.' });
@@ -266,7 +271,7 @@ wss.on('connection', (ws) => {
     }
 
     if (payload.type === 'opponent_selecting') {
-      // Broadcast opponent's selection to the waiting player
+      // Ephemeral UX packet: tells opponent which square is being answered now.
       const roomId = ws.roomId;
       if (roomId && rooms.has(roomId)) {
         const room = rooms.get(roomId);
