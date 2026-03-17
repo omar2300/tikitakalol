@@ -37,10 +37,21 @@ const FUZZY_TUNING = {
 
 // Tuning: online matchmaking endpoint.
 // For local/home server, point this to your Debian host and open the port.
+const DEFAULT_PROD_MATCH_URL = 'wss://tikitakalol.duckdns.org';
 const ONLINE_TUNING = {
-  serverUrl:
-    window.MATCH_SERVER_URL
-    || `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:8787`,
+  serverUrl: (() => {
+    const configured = typeof window.MATCH_SERVER_URL === 'string'
+      ? window.MATCH_SERVER_URL.trim()
+      : '';
+    if (configured) return configured;
+
+    // On GitHub Pages, default to the public secure endpoint.
+    if (window.location.hostname.endsWith('github.io')) {
+      return DEFAULT_PROD_MATCH_URL;
+    }
+
+    return `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:8787`;
+  })(),
 };
 
 // Tuning: desktop autocomplete panel layout and mobile/desktop split behavior.
@@ -190,9 +201,14 @@ function startOnlineMatchmaking() {
   }
 
   try {
-    onlineSocket = new WebSocket(ONLINE_TUNING.serverUrl);
+    const wsUrl = String(ONLINE_TUNING.serverUrl || '').trim();
+    if (!/^wss?:\/\//i.test(wsUrl)) {
+      throw new Error(`Invalid WebSocket URL: ${wsUrl || '(empty)'}`);
+    }
+    onlineSocket = new WebSocket(wsUrl);
   } catch (error) {
-    setOnlineStatus('Could not open WebSocket. Check server URL.', 'status-error');
+    const reason = error instanceof Error ? error.message : 'Unknown URL error';
+    setOnlineStatus(`Could not open WebSocket (${reason}).`, 'status-error');
     if (findMatchButton) findMatchButton.textContent = 'Find Opponent';
     return;
   }
@@ -225,7 +241,7 @@ function startOnlineMatchmaking() {
   });
 
   onlineSocket.addEventListener('error', () => {
-    setOnlineStatus('Could not reach server.', 'status-error');
+    setOnlineStatus(`Could not reach server (${ONLINE_TUNING.serverUrl}).`, 'status-error');
   });
 }
 
