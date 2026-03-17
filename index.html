@@ -4,13 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>League of Legends Tic Tac Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
-    <h1>League of Legends Tic Tac Toe</h1>
-    <div id="board">
-      <!-- This will be filled dynamically with JavaScript -->
-    </div>
+    <aside class="online-panel" aria-label="Online Matchmaking">
+      <div class="online-head">Online</div>
+      <label class="online-mode-toggle">
+        <input type="checkbox" id="online-mode-toggle" />
+        <span>Random Match</span>
+      </label>
+      <button id="find-match-btn" type="button" disabled>Find Opponent</button>
+      <div id="online-status" class="online-status">Offline mode.</div>
+    </aside>
+
+    <main class="app-shell">
+      <section class="board-stage">
+        <div class="brand-badge" aria-label="League Tic Tac Toe">
+          <span class="brand-text">League Tic Tac Toe</span>
+        </div>
+
+        <section class="board-panel">
+          <div id="board" class="board-loading"></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="celebration-layer" aria-hidden="true"></div>
+    <script>
+  window.MATCH_SERVER_URL = "ws://10.0.0.28:8787";
+</script>
     <script src="script.js"></script>
   </body>
 </html>
