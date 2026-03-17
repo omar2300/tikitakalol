@@ -6,9 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update": "node scripts/update-champions.js",
+    "match-server": "node server/matchmaking-server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "vite": "^5.2.0"
+    "vite": "^8.0.0"
   }
 }
