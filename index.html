@@ -17,9 +17,11 @@
       <div class="online-head">Online</div>
       <label class="online-mode-toggle">
         <input type="checkbox" id="online-mode-toggle" />
-        <span>Random Match</span>
+        <span>Online Mode</span>
       </label>
-      <button id="find-match-btn" type="button" disabled>Find Opponent</button>
+      <input id="match-code-input" type="text" placeholder="Match code (optional)" maxlength="32" />
+      <button id="find-match-btn" type="button" disabled>Online Match</button>
+      <button id="rematch-btn" type="button" disabled>Rematch</button>
       <div id="online-status" class="online-status">Offline mode.</div>
     </aside>
 

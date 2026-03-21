@@ -23,6 +23,7 @@ const allLanes = ['Toplane', 'Midlane', 'Botlane', 'Support', 'Jungle'];
 
 const wss = new WebSocketServer({ port: PORT });
 let waitingClient = null;
+const waitingByCode = new Map(); // code -> ws
 // roomId -> { players, board, currentPlayer, over }
 const rooms = new Map();
 
@@ -73,6 +74,11 @@ function removeClientFromRoom(ws, notifyOpponent = true) {
     waitingClient = null;
   }
 
+  if (ws.waitCode && waitingByCode.get(ws.waitCode) === ws) {
+    waitingByCode.delete(ws.waitCode);
+  }
+  ws.waitCode = null;
+
   const roomId = ws.roomId;
   if (!roomId || !rooms.has(roomId)) {
     ws.roomId = null;
@@ -97,32 +103,20 @@ function removeClientFromRoom(ws, notifyOpponent = true) {
   rooms.delete(roomId);
 }
 
-function handleJoinRandom(ws) {
-  // Simple random matchmaking: first player waits, second player creates a room.
-  if (ws.roomId) {
-    return;
-  }
-
-  if (!waitingClient || waitingClient.readyState !== waitingClient.OPEN || waitingClient === ws) {
-    waitingClient = ws;
-    send(ws, { type: 'queued' });
-    return;
-  }
-
-  const opponent = waitingClient;
-  waitingClient = null;
-
+function startRoom(a, b) {
   const roomId = randomId();
   const boardConfig = makeBoardConfig();
 
-  const waitingGetsX = Math.random() > 0.5;
-  const xPlayer = waitingGetsX ? opponent : ws;
-  const oPlayer = waitingGetsX ? ws : opponent;
+  const aGetsX = Math.random() > 0.5;
+  const xPlayer = aGetsX ? a : b;
+  const oPlayer = aGetsX ? b : a;
 
   xPlayer.roomId = roomId;
   oPlayer.roomId = roomId;
   xPlayer.symbol = 'X';
   oPlayer.symbol = 'O';
+  xPlayer.waitCode = null;
+  oPlayer.waitCode = null;
 
   rooms.set(roomId, {
     roomId,
@@ -130,6 +124,7 @@ function handleJoinRandom(ws) {
     board: ['', '', '', '', '', '', '', '', ''],
     currentPlayer: 'X',
     over: false,
+    rematchVotes: { X: false, O: false },
   });
 
   send(xPlayer, {
@@ -149,6 +144,58 @@ function handleJoinRandom(ws) {
     regions: boardConfig.regions,
     lanes: boardConfig.lanes,
   });
+}
+
+function handleJoinRandom(ws) {
+  // Simple random matchmaking: first player waits, second player creates a room.
+  if (ws.roomId) {
+    return;
+  }
+
+  if (!waitingClient || waitingClient.readyState !== waitingClient.OPEN || waitingClient === ws) {
+    waitingClient = ws;
+    ws.waitCode = null;
+    send(ws, { type: 'queued' });
+    return;
+  }
+
+  const opponent = waitingClient;
+  waitingClient = null;
+  startRoom(opponent, ws);
+}
+
+function handleJoinCode(ws, payload) {
+  if (ws.roomId) {
+    return;
+  }
+
+  const raw = typeof payload.code === 'string' ? payload.code : '';
+  const code = raw.trim().toLowerCase();
+  if (!code) {
+    send(ws, { type: 'error', message: 'Enter a match code.' });
+    return;
+  }
+  if (code.length > 32) {
+    send(ws, { type: 'error', message: 'Match code is too long.' });
+    return;
+  }
+
+  if (waitingClient === ws) {
+    waitingClient = null;
+  }
+
+  const waiting = waitingByCode.get(code);
+  if (!waiting || waiting.readyState !== waiting.OPEN || waiting === ws) {
+    waitingByCode.set(code, ws);
+    ws.waitCode = code;
+    send(ws, { type: 'queued', code });
+    return;
+  }
+
+  waitingByCode.delete(code);
+  ws.waitCode = null;
+  waiting.waitCode = null;
+  startRoom(waiting, ws);
 }
 
 function handleMove(ws, payload) {
@@ -243,6 +290,65 @@ function handleTurnPass(ws) {
   });
 }
 
+function handleRematchRequest(ws) {
+  const roomId = ws.roomId;
+  if (!roomId || !rooms.has(roomId)) {
+    send(ws, { type: 'error', message: 'Room not found.' });
+    return;
+  }
+
+  const room = rooms.get(roomId);
+  const symbol = ws.symbol;
+  if (!symbol || !room.players[symbol]) {
+    send(ws, { type: 'error', message: 'Invalid rematch requester.' });
+    return;
+  }
+
+  room.rematchVotes = room.rematchVotes || { X: false, O: false };
+  room.rematchVotes[symbol] = true;
+  const opponentSymbol = symbol === 'X' ? 'O' : 'X';
+  const opponent = room.players[opponentSymbol];
+
+  // Wait until both players request rematch.
+  if (!room.rematchVotes[opponentSymbol]) {
+    send(ws, { type: 'rematch_requested' });
+    send(opponent, { type: 'rematch_requested', by: symbol });
+    return;
+  }
+
+  // Both accepted: swap roles and reset board state, keep room/socket pair intact.
+  const previousX = room.players.X;
+  const previousO = room.players.O;
+  room.players.X = previousO;
+  room.players.O = previousX;
+  room.players.X.symbol = 'X';
+  room.players.O.symbol = 'O';
+
+  room.board = ['', '', '', '', '', '', '', '', ''];
+  room.currentPlayer = 'X';
+  room.over = false;
+  room.rematchVotes = { X: false, O: false };
+  const boardConfig = makeBoardConfig();
+
+  send(room.players.X, {
+    type: 'rematch_started',
+    roomId,
+    symbol: 'X',
+    startingPlayer: 'X',
+    regions: boardConfig.regions,
+    lanes: boardConfig.lanes,
+  });
+
+  send(room.players.O, {
+    type: 'rematch_started',
+    roomId,
+    symbol: 'O',
+    startingPlayer: 'X',
+    regions: boardConfig.regions,
+    lanes: boardConfig.lanes,
+  });
+}
+
 wss.on('connection', (ws) => {
   ws.roomId = null;
   ws.symbol = null;
@@ -260,6 +366,11 @@ wss.on('connection', (ws) => {
       return;
     }
 
+    if (payload.type === 'join_code') {
+      handleJoinCode(ws, payload);
+      return;
+    }
+
     if (payload.type === 'move') {
       handleMove(ws, payload);
       return;
@@ -267,6 +378,11 @@ wss.on('connection', (ws) => {
 
     if (payload.type === 'turn_pass') {
       handleTurnPass(ws);
+      return;
+    }
+
+    if (payload.type === 'rematch_request') {
+      handleRematchRequest(ws);
       return;
     }
 

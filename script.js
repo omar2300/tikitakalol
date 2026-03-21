@@ -75,7 +75,9 @@ const gameStatusElement = document.getElementById('game-status');
 const celebrationLayer = document.getElementById('celebration-layer');
 const rerollBoardBtn = document.getElementById('rerollBoardBtn');
 const onlineModeToggle = document.getElementById('online-mode-toggle');
+const matchCodeInput = document.getElementById('match-code-input');
 const findMatchButton = document.getElementById('find-match-btn');
+const rematchButton = document.getElementById('rematch-btn');
 const onlineStatusElement = document.getElementById('online-status');
 
 // Define the initial game state
@@ -156,7 +158,7 @@ if (onlineModeToggle) {
     onlineModeEnabled = onlineModeToggle.checked;
     if (findMatchButton) {
       findMatchButton.disabled = !onlineModeEnabled;
-      findMatchButton.textContent = 'Find Opponent';
+      updateFindMatchButtonLabel();
     }
 
     if (!onlineModeEnabled) {
@@ -165,7 +167,13 @@ if (onlineModeToggle) {
       return;
     }
 
-    setOnlineStatus('Online mode ready. Click Find Opponent.', 'status-ok');
+    setOnlineStatus('Online mode ready. Use Random Match or enter a code.', 'status-ok');
+  });
+}
+
+if (matchCodeInput) {
+  matchCodeInput.addEventListener('input', () => {
+    updateFindMatchButtonLabel();
   });
 }
 
@@ -176,7 +184,20 @@ if (findMatchButton) {
       teardownOnlineSession('Matchmaking stopped.');
       return;
     }
-    startOnlineMatchmaking();
+    const code = matchCodeInput ? matchCodeInput.value.trim() : '';
+    startOnlineMatchmaking(code);
+  });
+}
+
+if (rematchButton) {
+  rematchButton.addEventListener('click', () => {
+    if (!onlineModeEnabled || !onlineMatched || !gameOver) return;
+    sendOnlineMessage({
+      type: 'rematch_request',
+      roomId: onlineRoomId,
+    });
+    rematchButton.disabled = true;
+    setOnlineStatus('Rematch requested. Waiting for opponent...', 'status-warn');
   });
 }
 
@@ -189,13 +210,32 @@ function setOnlineStatus(message, tone = '') {
   }
 }
 
+function updateRematchButtonState() {
+  if (!rematchButton) return;
+  rematchButton.disabled = !(onlineModeEnabled && onlineMatched && gameOver);
+}
+
+function updateFindMatchButtonLabel() {
+  if (!findMatchButton) return;
+  if (onlineQueued) {
+    findMatchButton.textContent = 'Cancel Matchmaking';
+    return;
+  }
+  if (onlineMatched) {
+    findMatchButton.textContent = 'Leave Match';
+    return;
+  }
+  const hasCode = Boolean(matchCodeInput && matchCodeInput.value.trim());
+  findMatchButton.textContent = hasCode ? 'Find Match' : 'Random Match';
+}
+
 // Client -> server transport helper. All online packets go through this.
 function sendOnlineMessage(payload) {
   if (!onlineSocket || onlineSocket.readyState !== WebSocket.OPEN) return;
   onlineSocket.send(JSON.stringify(payload));
 }
 
-function startOnlineMatchmaking() {
+function startOnlineMatchmaking(code = '') {
   setOnlineStatus('Connecting to matchmaking server...', 'status-warn');
   if (findMatchButton) {
     findMatchButton.textContent = 'Cancel Matchmaking';
@@ -210,14 +250,18 @@ function startOnlineMatchmaking() {
   } catch (error) {
     const reason = error instanceof Error ? error.message : 'Unknown URL error';
     setOnlineStatus(`Could not open WebSocket (${reason}).`, 'status-error');
-    if (findMatchButton) findMatchButton.textContent = 'Find Opponent';
+    updateFindMatchButtonLabel();
     return;
   }
 
   // WebSocket lifecycle: open => join queue, message => state sync,
   // close/error => reset client session UI/state.
   onlineSocket.addEventListener('open', () => {
-    sendOnlineMessage({ type: 'join_random' });
+    if (code) {
+      sendOnlineMessage({ type: 'join_code', code });
+    } else {
+      sendOnlineMessage({ type: 'join_random' });
+    }
   });
 
   onlineSocket.addEventListener('message', (event) => {
@@ -240,7 +284,8 @@ function startOnlineMatchmaking() {
     onlineMatched = false;
     onlineRoomId = '';
     onlineSymbol = '';
-    if (findMatchButton) findMatchButton.textContent = 'Find Opponent';
+    updateFindMatchButtonLabel();
+    updateRematchButtonState();
   });
 
   onlineSocket.addEventListener('error', () => {
@@ -258,18 +303,23 @@ function teardownOnlineSession(statusMessage = 'Offline mode.') {
     onlineSocket.close();
   }
   onlineSocket = null;
-  if (findMatchButton) {
-    findMatchButton.textContent = 'Find Opponent';
-  }
+  updateFindMatchButtonLabel();
   setOnlineStatus(statusMessage);
+  updateRematchButtonState();
 }
 
 function handleOnlineMessage(data) {
   // Server -> client protocol messages:
-  // queued, matched, opponent_selecting, move, turn_pass, opponent_left, error
+  // queued, matched, opponent_selecting, move, turn_pass,
+  // rematch_requested, rematch_started, opponent_left, error
   if (data.type === 'queued') {
     onlineQueued = true;
-    setOnlineStatus('Searching for an opponent...', 'status-warn');
+    setOnlineStatus(
+      data.code
+        ? `Waiting for code match: ${data.code}`
+        : 'Searching for an opponent...',
+      'status-warn'
+    );
     return;
   }
 
@@ -296,6 +346,7 @@ function handleOnlineMessage(data) {
         : `Matched as ${onlineSymbol}. Opponent's turn.`,
       'info'
     );
+    updateRematchButtonState();
     renderBoard();
     return;
   }
@@ -335,11 +386,43 @@ function handleOnlineMessage(data) {
     onlineMatched = false;
     gameOver = true;
     opponentSelectedCell = -1;
-    if (findMatchButton) {
-      findMatchButton.textContent = 'Find Opponent';
-    }
+    updateFindMatchButtonLabel();
     setOnlineStatus('Opponent disconnected.', 'status-warn');
     setStatus('Opponent left the match.', 'error');
+    updateRematchButtonState();
+    renderBoard();
+    return;
+  }
+
+  if (data.type === 'rematch_requested') {
+    if (!onlineMatched) return;
+    setOnlineStatus('Opponent requested a rematch. Click Rematch to accept.', 'status-warn');
+    if (rematchButton && gameOver) {
+      rematchButton.disabled = false;
+    }
+    return;
+  }
+
+  if (data.type === 'rematch_started') {
+    if (!onlineMatched) return;
+    if (data.symbol) {
+      onlineSymbol = data.symbol;
+    }
+    [lane1, lane2, lane3] = data.lanes;
+    [reg1, reg2, reg3] = data.regions;
+    board = ['', '', '', '', '', '', '', '', ''];
+    claimedChampions = Array(9).fill('');
+    currentPlayer = data.startingPlayer || X_MARKER;
+    gameOver = false;
+    opponentSelectedCell = -1;
+    setOnlineStatus('Rematch started.', 'status-ok');
+    setStatus(
+      currentPlayer === onlineSymbol
+        ? `Rematch started. You are ${onlineSymbol}. Your turn.`
+        : `Rematch started. You are ${onlineSymbol}. Opponent's turn.`,
+      'info'
+    );
+    updateRematchButtonState();
     renderBoard();
     return;
   }
@@ -439,6 +522,7 @@ function finishTurn(turnMessage = '') {
     } else {
       launchEmojiConfetti();
     }
+    updateRematchButtonState();
     renderBoard();
     return;
   }
@@ -449,6 +533,7 @@ function finishTurn(turnMessage = '') {
       ? `${turnMessage} Draw.`
       : 'Draw.';
     setStatus(drawMessage, 'info');
+    updateRematchButtonState();
     renderBoard();
     return;
   }
@@ -458,6 +543,7 @@ function finishTurn(turnMessage = '') {
     ? `${turnMessage} Player ${currentPlayer}'s turn.`
     : `Player ${currentPlayer}'s turn.`;
   setStatus(nextTurnMessage, '');
+  updateRematchButtonState();
   renderBoard();
 }
 
@@ -1129,6 +1215,7 @@ function resetGame(options = {}) {
     [reg1, reg2, reg3] = getRandomUniqueItems(allRegions, 3);
   }
   setStatus(`Player ${currentPlayer}'s turn.`, '');
+  updateRematchButtonState();
   renderBoard();
 }
 

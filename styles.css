@@ -77,11 +77,37 @@ body::before {
   margin: 0;
 }
 
+#match-code-input {
+  width: 100%;
+  border: 1px solid rgba(217, 184, 122, 0.25);
+  border-radius: 10px;
+  background: rgba(1, 8, 14, 0.5);
+  color: var(--ink);
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+#match-code-input::placeholder {
+  color: var(--muted);
+}
+
 #find-match-btn {
   width: 100%;
 }
 
+#rematch-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
 #find-match-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  filter: grayscale(0.1);
+}
+
+#rematch-btn:disabled {
   cursor: not-allowed;
   opacity: 0.58;
   filter: grayscale(0.1);
