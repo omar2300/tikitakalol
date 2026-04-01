@@ -16,6 +16,10 @@
       {
         "region": "Ionia",
         "lane": "Midlane"
+      },
+      {
+        "region": "Ionia",
+        "lane": "Toplane"
       }
     ],
     "Akshan": [
@@ -64,6 +68,10 @@
       {
         "region": "Freljord",
         "lane": "Botlane"
+      },
+      {
+        "region": "Freljord",
+        "lane": "Support"
       }
     ],
     "Aurelion Sol": [
@@ -76,6 +84,10 @@
       {
         "region": "Freljord",
         "lane": "Midlane"
+      },
+      {
+        "region": "Freljord",
+        "lane": "Toplane"
       }
     ],
     "Azir": [
@@ -106,6 +118,10 @@
       {
         "region": "Freljord",
         "lane": "Support"
+      },
+      {
+        "region": "Freljord",
+        "lane": "Jungle"
       }
     ],
     "Braum": [
@@ -133,10 +149,6 @@
       }
     ],
     "Cassiopeia": [
-      {
-        "region": "Noxus",
-        "lane": "Toplane"
-      },
       {
         "region": "Noxus",
         "lane": "Midlane"
@@ -200,10 +212,6 @@
       {
         "region": "ShadowIsles",
         "lane": "Jungle"
-      },
-      {
-        "region": "ShadowIsles",
-        "lane": "Support"
       }
     ],
     "Evelynn": [
@@ -276,10 +284,6 @@
       {
         "region": "ShadowIsles",
         "lane": "Toplane"
-      },
-      {
-        "region": "ShadowIsles",
-        "lane": "Jungle"
       }
     ],
     "Hecarim": [
@@ -291,17 +295,17 @@
     "Heimerdinger": [
       {
         "region": "Piltover",
-        "lane": "Toplane"
-      },
-      {
-        "region": "Piltover",
-        "lane": "Midlane"
+        "lane": "Support"
       }
     ],
     "Hwei": [
       {
         "region": "Ionia",
         "lane": "Midlane"
+      },
+      {
+        "region": "Ionia",
+        "lane": "Support"
       }
     ],
     "Illaoi": [
@@ -341,21 +345,17 @@
     "Jax": [
       {
         "region": "Shurima",
-        "lane": "Jungle"
+        "lane": "Toplane"
       },
       {
         "region": "Shurima",
-        "lane": "Toplane"
+        "lane": "Jungle"
       }
     ],
     "Jayce": [
       {
         "region": "Piltover",
         "lane": "Toplane"
-      },
-      {
-        "region": "Piltover",
-        "lane": "Jungle"
       }
     ],
     "Jhin": [
@@ -432,10 +432,6 @@
       {
         "region": "Ionia",
         "lane": "Toplane"
-      },
-      {
-        "region": "Ionia",
-        "lane": "Midlane"
       }
     ],
     "Kha'Zix": [
@@ -569,18 +565,14 @@
     "Morgana": [
       {
         "region": "Demacia",
-        "lane": "Midlane"
+        "lane": "Support"
       },
       {
         "region": "Demacia",
-        "lane": "Support"
+        "lane": "Midlane"
       }
     ],
     "Naafiri": [
-      {
-        "region": "Darkin",
-        "lane": "Jungle"
-      },
       {
         "region": "Darkin",
         "lane": "Midlane"
@@ -608,6 +600,10 @@
       {
         "region": "Ixtal",
         "lane": "Support"
+      },
+      {
+        "region": "Ixtal",
+        "lane": "Midlane"
       }
     ],
     "Nidalee": [
@@ -659,10 +655,6 @@
       },
       {
         "region": "Targon",
-        "lane": "Jungle"
-      },
-      {
-        "region": "Targon",
         "lane": "Support"
       }
     ],
@@ -673,7 +665,7 @@
       },
       {
         "region": "Demacia",
-        "lane": "Support"
+        "lane": "Jungle"
       }
     ],
     "Pyke": [
@@ -683,10 +675,6 @@
       }
     ],
     "Qiyana": [
-      {
-        "region": "Ixtal",
-        "lane": "Jungle"
-      },
       {
         "region": "Ixtal",
         "lane": "Midlane"
@@ -810,20 +798,12 @@
       {
         "region": "?",
         "lane": "Jungle"
-      },
-      {
-        "region": "?",
-        "lane": "Support"
       }
     ],
     "Shen": [
       {
         "region": "Ionia",
         "lane": "Toplane"
-      },
-      {
-        "region": "Ionia",
-        "lane": "Support"
       }
     ],
     "Shyvana": [
@@ -854,6 +834,10 @@
       {
         "region": "Ixtal",
         "lane": "Jungle"
+      },
+      {
+        "region": "Ixtal",
+        "lane": "Toplane"
       }
     ],
     "Smolder": [
@@ -878,13 +862,13 @@
       {
         "region": "Noxus",
         "lane": "Support"
+      },
+      {
+        "region": "Noxus",
+        "lane": "Midlane"
       }
     ],
     "Sylas": [
-      {
-        "region": "Demacia",
-        "lane": "Jungle"
-      },
       {
         "region": "Demacia",
         "lane": "Midlane"
@@ -906,6 +890,10 @@
       {
         "region": "Shurima",
         "lane": "Midlane"
+      },
+      {
+        "region": "Shurima",
+        "lane": "Jungle"
       }
     ],
     "Talon": [
@@ -954,6 +942,10 @@
       {
         "region": "Bilgewater",
         "lane": "Midlane"
+      },
+      {
+        "region": "Bilgewater",
+        "lane": "Botlane"
       }
     ],
     "Twitch": [
@@ -966,6 +958,10 @@
       {
         "region": "Freljord",
         "lane": "Jungle"
+      },
+      {
+        "region": "Freljord",
+        "lane": "Toplane"
       }
     ],
     "Urgot": [
@@ -981,10 +977,6 @@
       }
     ],
     "Vayne": [
-      {
-        "region": "Demacia",
-        "lane": "Toplane"
-      },
       {
         "region": "Demacia",
         "lane": "Botlane"
@@ -1027,10 +1019,6 @@
       }
     ],
     "Vladimir": [
-      {
-        "region": "Noxus",
-        "lane": "Toplane"
-      },
       {
         "region": "Noxus",
         "lane": "Midlane"
@@ -1084,6 +1072,10 @@
       {
         "region": "Ionia",
         "lane": "Midlane"
+      },
+      {
+        "region": "Ionia",
+        "lane": "Botlane"
       }
     ],
     "Yone": [
