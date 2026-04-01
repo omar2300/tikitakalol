@@ -15,11 +15,11 @@
     "Akali": [
       {
         "region": "Ionia",
-        "lane": "Midlane"
+        "lane": "Toplane"
       },
       {
         "region": "Ionia",
-        "lane": "Toplane"
+        "lane": "Midlane"
       }
     ],
     "Akshan": [
@@ -117,11 +117,11 @@
     "Brand": [
       {
         "region": "Freljord",
-        "lane": "Support"
+        "lane": "Jungle"
       },
       {
         "region": "Freljord",
-        "lane": "Jungle"
+        "lane": "Support"
       }
     ],
     "Braum": [
@@ -599,11 +599,11 @@
     "Neeko": [
       {
         "region": "Ixtal",
-        "lane": "Support"
+        "lane": "Midlane"
       },
       {
         "region": "Ixtal",
-        "lane": "Midlane"
+        "lane": "Support"
       }
     ],
     "Nidalee": [
@@ -861,11 +861,11 @@
     "Swain": [
       {
         "region": "Noxus",
-        "lane": "Support"
+        "lane": "Midlane"
       },
       {
         "region": "Noxus",
-        "lane": "Midlane"
+        "lane": "Support"
       }
     ],
     "Sylas": [
@@ -889,11 +889,11 @@
     "Taliyah": [
       {
         "region": "Shurima",
-        "lane": "Midlane"
+        "lane": "Jungle"
       },
       {
         "region": "Shurima",
-        "lane": "Jungle"
+        "lane": "Midlane"
       }
     ],
     "Talon": [
@@ -957,11 +957,11 @@
     "Udyr": [
       {
         "region": "Freljord",
-        "lane": "Jungle"
+        "lane": "Toplane"
       },
       {
         "region": "Freljord",
-        "lane": "Toplane"
+        "lane": "Jungle"
       }
     ],
     "Urgot": [
