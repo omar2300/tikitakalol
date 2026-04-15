@@ -13,7 +13,7 @@ GitHub Pages can host your static frontend, but it cannot host a persistent WebS
 
 Use one of these:
 
-1. Your Debian home server (best for now)
+1. Your home server 
 2. A cloud VM / container
 3. A hosted realtime backend
 
